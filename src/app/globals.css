@@ -191,4 +191,14 @@ body {
   box-shadow: 0 0 14px rgba(249, 115, 22, 0.85);
 }
 
+/* Hide scrollbars on modern browsers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
 

@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import {
   ShieldCheck,
   CheckCircle2,
   Award,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 interface PartnerTool {
@@ -200,6 +202,17 @@ const partnersAndToolsList: PartnerTool[] = [
 
 export function PartnersAndTools() {
   const [activeFilter, setActiveFilter] = useState<"all" | "partner" | "framework" | "tool">("all");
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollNav = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const cardWidth = scrollRef.current.clientWidth * 0.85;
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -cardWidth : cardWidth,
+        behavior: "smooth",
+      });
+    }
+  };
 
   const filteredItems =
     activeFilter === "all"
@@ -281,12 +294,15 @@ export function PartnersAndTools() {
           </div>
         </div>
 
-        {/* Modern Interactive Partner & Tool Grid */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        {/* Modern Interactive Partner & Tool Grid: Horizontal Scroll on Mobile (1 card view), Grid on sm/lg */}
+        <div
+          ref={scrollRef}
+          className="mt-12 flex sm:grid sm:grid-cols-2 lg:grid-cols-5 gap-4 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory pb-4 sm:pb-0 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 scroll-smooth"
+        >
           {filteredItems.map((item) => (
             <div
               key={item.name}
-              className={`group relative p-5 rounded-2xl bg-slate-900/70 backdrop-blur-md border transition-all duration-300 hover:-translate-y-1.5 hover:bg-slate-900/90 shadow-lg flex flex-col justify-between ${item.accentColor}`}
+              className={`group relative p-5 rounded-2xl bg-slate-900/80 backdrop-blur-md border transition-all duration-300 hover:-translate-y-1.5 hover:bg-slate-900/95 shadow-lg flex flex-col justify-between ${item.accentColor} w-[calc(100vw-2rem)] sm:w-auto min-w-[calc(100vw-2rem)] sm:min-w-0 flex-shrink-0 sm:flex-shrink snap-center`}
             >
               <div>
                 {/* Header Tag / Badge */}
@@ -296,7 +312,7 @@ export function PartnersAndTools() {
                       {item.badge}
                     </span>
                   )}
-                  <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
+                  <span className="w-2 h-2 rounded-full bg-emerald-500/80 animate-pulse" />
                 </div>
 
                 {/* Logo Display Container: Icon + Text beside it */}
@@ -305,18 +321,43 @@ export function PartnersAndTools() {
                 </div>
 
                 {/* Description */}
-                <p className="mt-3 text-xs text-slate-400 leading-relaxed line-clamp-3">
+                <p className="mt-3 text-xs text-slate-300 leading-relaxed line-clamp-3">
                   {item.description}
                 </p>
               </div>
 
               {/* Bottom Subtle Status */}
-              <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-500 group-hover:text-slate-400 transition-colors">
+              <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-400 group-hover:text-slate-300 transition-colors">
                 <span>Production Verified</span>
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Mobile Navigation Arrows & Swipe Indicator */}
+        <div className="flex sm:hidden items-center justify-between pt-3 px-2">
+          <button
+            onClick={() => scrollNav("left")}
+            className="p-2 rounded-xl bg-slate-900 border border-white/10 text-slate-300 hover:text-white hover:border-orange-500/50 active:scale-95 transition-all shadow-md flex items-center gap-1 text-xs font-semibold"
+            aria-label="Previous partner card"
+          >
+            <ChevronLeft className="w-4 h-4 text-orange-400" />
+            <span>Prev</span>
+          </button>
+
+          <span className="text-[11px] text-slate-400 font-mono">
+            Swipe ↔ or tap arrows
+          </span>
+
+          <button
+            onClick={() => scrollNav("right")}
+            className="p-2 rounded-xl bg-slate-900 border border-white/10 text-slate-300 hover:text-white hover:border-orange-500/50 active:scale-95 transition-all shadow-md flex items-center gap-1 text-xs font-semibold"
+            aria-label="Next partner card"
+          >
+            <span>Next</span>
+            <ChevronRight className="w-4 h-4 text-orange-400" />
+          </button>
         </div>
 
         {/* Bottom Trust Statement */}
