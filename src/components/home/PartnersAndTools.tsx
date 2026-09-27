@@ -200,6 +200,9 @@ const partnersAndToolsList: PartnerTool[] = [
   },
 ];
 
+import { FadeInUp } from "@/components/ui/ScrollReveal";
+import { motion } from "framer-motion";
+
 export function PartnersAndTools() {
   const [activeFilter, setActiveFilter] = useState<"all" | "partner" | "framework" | "tool">("all");
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -231,7 +234,7 @@ export function PartnersAndTools() {
 
       <div className="section-container relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
+        <FadeInUp className="text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/30 text-xs font-semibold shadow-sm">
             <Award className="w-3.5 h-3.5 text-orange-400" />
             <span>STRATEGIC ECOSYSTEM & TECH STACK</span>
@@ -292,16 +295,20 @@ export function PartnersAndTools() {
               Developer Tools & DevOps
             </button>
           </div>
-        </div>
+        </FadeInUp>
 
         {/* Modern Interactive Partner & Tool Grid: Horizontal Scroll on Mobile (1 card view), Grid on sm/lg */}
         <div
           ref={scrollRef}
           className="mt-12 flex sm:grid sm:grid-cols-2 lg:grid-cols-5 gap-4 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory pb-4 sm:pb-0 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 scroll-smooth"
         >
-          {filteredItems.map((item) => (
-            <div
+          {filteredItems.map((item, idx) => (
+            <motion.div
               key={item.name}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, delay: idx * 0.05 }}
               className={`group relative p-5 rounded-2xl bg-slate-900/80 backdrop-blur-md border transition-all duration-300 hover:-translate-y-1.5 hover:bg-slate-900/95 shadow-lg flex flex-col justify-between ${item.accentColor} w-[calc(100vw-2rem)] sm:w-auto min-w-[calc(100vw-2rem)] sm:min-w-0 flex-shrink-0 sm:flex-shrink snap-center`}
             >
               <div>
@@ -331,7 +338,7 @@ export function PartnersAndTools() {
                 <span>Production Verified</span>
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -361,7 +368,7 @@ export function PartnersAndTools() {
         </div>
 
         {/* Bottom Trust Statement */}
-        <div className="mt-12 p-5 rounded-2xl bg-slate-900/50 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <FadeInUp delay={0.2} className="mt-12 p-5 rounded-2xl bg-slate-900/50 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div className="flex items-center gap-3">
             <div className="p-2.5 rounded-xl bg-orange-500/10 text-orange-400 border border-orange-500/20 shrink-0">
               <ShieldCheck className="w-5 h-5" />
@@ -378,7 +385,7 @@ export function PartnersAndTools() {
           >
             Consult Our Architecture Team →
           </a>
-        </div>
+        </FadeInUp>
       </div>
     </section>
   );

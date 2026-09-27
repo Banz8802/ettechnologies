@@ -222,6 +222,8 @@ function CardIllustration({ type, color }: { type: string; color: string }) {
   );
 }
 
+import { FadeInUp } from "@/components/ui/ScrollReveal";
+
 export function ServicesOverview() {
   return (
     <section className="relative py-28 bg-[#040510] overflow-hidden border-t border-white/10">
@@ -231,7 +233,7 @@ export function ServicesOverview() {
 
       {/* Section Header (Centered) */}
       <div className="section-container relative z-10 mb-8">
-        <div className="text-center max-w-3xl mx-auto space-y-4">
+        <FadeInUp className="text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-orange-500/10 via-amber-500/10 to-orange-500/10 text-orange-400 border border-orange-500/30 text-xs font-semibold shadow-inner">
             <Cpu className="w-3.5 h-3.5 text-orange-400 animate-spin" style={{ animationDuration: "12s" }} />
             <span>CORE IT CAPABILITIES & ENGINEERING</span>
@@ -248,11 +250,11 @@ export function ServicesOverview() {
             Explore our end-to-end software engineering, mobile development, custom cloud architectures,
             and digital systems tailored for modern organizations.
           </p>
-        </div>
+        </FadeInUp>
       </div>
 
       {/* Full-Width 3D Coverflow Slider for symmetrical centering */}
-      <div className="w-full relative z-10 overflow-hidden">
+      <FadeInUp delay={0.15} className="w-full relative z-10 overflow-hidden">
         <Swiper
           effect={"coverflow"}
           grabCursor={true}
@@ -337,10 +339,10 @@ export function ServicesOverview() {
 
         {/* Interactive Pagination Bullets */}
         <div className="services-swiper-pagination" />
-      </div>
+      </FadeInUp>
 
       {/* Bottom CTA to View All Services */}
-      <div className="section-container relative z-10 mt-10">
+      <FadeInUp delay={0.2} className="section-container relative z-10 mt-10">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
           <Link
             href="/services"
@@ -357,7 +359,7 @@ export function ServicesOverview() {
             <span>Request a Custom Quote</span>
           </Link>
         </div>
-      </div>
+      </FadeInUp>
     </section>
   );
 }

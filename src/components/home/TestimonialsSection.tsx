@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { Quote, Star, ChevronLeft, ChevronRight, CheckCircle2, Building2, School } from "lucide-react";
 import { testimonialsData } from "@/data/testimonials";
 
+import { FadeInUp } from "@/components/ui/ScrollReveal";
+
 export function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const current = testimonialsData[currentIndex];
@@ -23,7 +25,7 @@ export function TestimonialsSection() {
 
       <div className="section-container relative z-10">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
+        <FadeInUp className="text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 text-xs font-semibold">
             <Quote className="w-3.5 h-3.5" />
             <span>REAL CLIENT PARTNERSHIPS</span>
@@ -40,10 +42,10 @@ export function TestimonialsSection() {
             We measure our success by the longevity and operational impact of our partnerships.
             Hear directly from the technology leaders who rely on ET Technologies.
           </p>
-        </div>
+        </FadeInUp>
 
         {/* Testimonials Display Grid */}
-        <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-6xl mx-auto">
+        <FadeInUp delay={0.15} className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-6xl mx-auto">
           {/* Main Card (8 cols) */}
           <div className="lg:col-span-8 glass-card p-8 sm:p-10 border border-white/15 bg-slate-900/80 shadow-2xl relative">
             <div className="flex items-center justify-between border-b border-white/10 pb-6 mb-6">
@@ -144,7 +146,7 @@ export function TestimonialsSection() {
               );
             })}
           </div>
-        </div>
+        </FadeInUp>
       </div>
     </section>
   );

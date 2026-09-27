@@ -6,6 +6,8 @@ import Image from "next/image";
 import { ArrowRight, Phone, ShieldCheck, Sparkles, Flag } from "lucide-react";
 import { companyInfo } from "@/data/company";
 
+import { FadeInUp } from "@/components/ui/ScrollReveal";
+
 export function CtaBanner() {
   return (
     <section className="relative py-24 bg-[#040510] overflow-hidden">
@@ -13,7 +15,7 @@ export function CtaBanner() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[450px] bg-gradient-to-r from-purple-700/15 via-blue-600/15 to-orange-600/10 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="section-container relative z-10">
-        <div className="relative rounded-[32px] pt-8 sm:pt-10 lg:pt-10 pb-10 sm:pb-12 lg:pb-14 px-6 sm:px-12 lg:px-16 border border-white/15 bg-gradient-to-b from-[#0c0d24]/95 via-[#080918]/98 to-[#050612]/98 shadow-2xl shadow-black/90 overflow-hidden text-center max-w-5xl mx-auto">
+        <FadeInUp className="relative rounded-[32px] pt-8 sm:pt-10 lg:pt-10 pb-10 sm:pb-12 lg:pb-14 px-6 sm:px-12 lg:px-16 border border-white/15 bg-gradient-to-b from-[#0c0d24]/95 via-[#080918]/98 to-[#050612]/98 shadow-2xl shadow-black/90 overflow-hidden text-center max-w-5xl mx-auto">
           {/* Subtle Top Border Glow Line (Orange to Purple) */}
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-orange-500" />
 
@@ -93,7 +95,7 @@ export function CtaBanner() {
               </div>
             </div>
           </div>
-        </div>
+        </FadeInUp>
       </div>
     </section>
   );

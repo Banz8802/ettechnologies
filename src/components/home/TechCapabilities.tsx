@@ -50,6 +50,9 @@ const steps = [
   },
 ];
 
+import { FadeInUp } from "@/components/ui/ScrollReveal";
+import { motion } from "framer-motion";
+
 export function TechCapabilities() {
   return (
     <section className="relative py-24 bg-[#030611] border-t border-white/10 overflow-hidden">
@@ -77,7 +80,7 @@ export function TechCapabilities() {
 
       <div className="section-container relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
+        <FadeInUp className="text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-semibold shadow-sm backdrop-blur-sm">
             <Terminal className="w-3.5 h-3.5 text-emerald-400" />
             <span>HOW WE DELIVER VALUE</span>
@@ -94,13 +97,17 @@ export function TechCapabilities() {
             We are not simply website builders—we are dedicated technology partners engineering
             complete software solutions designed to evolve alongside your organization for decades.
           </p>
-        </div>
+        </FadeInUp>
 
-        {/* 5-Step Process Timeline Cards */}
+        {/* 5-Step Process Timeline Cards with Staggered Delay Fade-Up */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {steps.map((item, idx) => (
-            <div
+            <motion.div
               key={item.step}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.55, delay: idx * 0.1 }}
               className="relative p-6 rounded-2xl bg-slate-900/80 backdrop-blur-xl border border-white/10 hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.25)] transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group shadow-xl"
             >
               {/* Connector Line on Desktop */}
@@ -136,12 +143,12 @@ export function TechCapabilities() {
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Verified Milestones</span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Tech Stack Banner */}
-        <div className="mt-14 p-6 sm:p-8 rounded-2xl bg-slate-900/75 backdrop-blur-xl border border-white/10 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xl">
+        <FadeInUp delay={0.2} className="mt-14 p-6 sm:p-8 rounded-2xl bg-slate-900/75 backdrop-blur-xl border border-white/10 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xl">
           <div className="space-y-1 text-center lg:text-left">
             <h4 className="text-base font-bold text-white">
               Enterprise Engineering Stack &amp; Frameworks
@@ -161,7 +168,7 @@ export function TechCapabilities() {
               </span>
             ))}
           </div>
-        </div>
+        </FadeInUp>
       </div>
     </section>
   );
