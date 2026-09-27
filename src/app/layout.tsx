@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { LiveChatWidget } from "@/components/ui/LiveChatWidget";
+import { BackToTop } from "@/components/ui/BackToTop";
 import { companyInfo } from "@/data/company";
 
 const inter = Inter({
@@ -89,6 +90,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <LiveChatWidget />
+        <BackToTop />
       </body>
     </html>
   );
